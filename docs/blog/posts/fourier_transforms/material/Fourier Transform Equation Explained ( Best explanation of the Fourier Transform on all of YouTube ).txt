@@ -1,0 +1,56 @@
+00:00:00:00 - 00:00:27:02
+Unknown
+Okay. So I want to discuss the Fourier transform. And as always, I encourage people to see an equation and to think about waveforms. So we're going to use some waveforms to explain what's going on. And also explain why it's a transform. So what we have is an equation with XT. That's a time domain function. And it's written in terms of another function.
+
+00:00:27:07 - 00:00:55:24
+Unknown
+The capital X, which is a frequency domain function depends on frequency. And so let's see what this means. Well let's think of which component of this equation on the right hand side depends on time. And it's this function here. And what is this function. We remember this is cos of omega t in. That's a real function plus an imaginary of sine of omega t okay.
+
+00:00:55:26 - 00:01:17:28
+Unknown
+So this is a waveform and this is a waveform. One of them is the real part and the other is the imaginary part. And I always like to think of drawing out these waveforms. So let's draw the cos waveform here. This is a cos waveform. And plus a j which is the sine wave form. This is a function of time.
+
+00:01:18:01 - 00:01:54:05
+Unknown
+And the sine waveform. Function of time. And they're at the same frequency. And I've drawn them there. And let's say that this is omega one. And so we if we multiply by what this formula says is if we take one of these complex exponentials, which has a real part that looks like this, a function in time and imaginary part like this function in time, if we multiply it by the value, this is a numerical value, a complex value at omega one.
+
+00:01:54:17 - 00:02:15:26
+Unknown
+Then we will get one of the terms in this integral. So when I see this equation I think about cos waveform at a particular frequency, a sine wave form at that frequency. And then we've got to have them all at different frequencies and add them all up. So let's draw one. At another frequency here.
+
+00:02:15:29 - 00:02:48:25
+Unknown
+So if we had a higher frequency, frequency was increasing as we go down, then this is also a Cos waveform at a higher frequency changes more quickly. Plus J of a sine waveform at that same higher frequency. So the sine waveform crosses the zero time at zero, whereas the Cos at the maximum. And again those are two waveforms at another frequency in this summation.
+
+00:02:48:28 - 00:03:14:25
+Unknown
+And again if we multiply by the value which is a waiting value that waits the component of these waveforms in the signal that we are representing. Okay. So we're going to add them all up. So these if we had or imagine all the ones in between there and of course beyond and so on all the way from minus infinity to infinity.
+
+00:03:14:27 - 00:03:48:01
+Unknown
+And what this equation says is these basis functions. So these complex exponentials are what we so-called basis functions. We add them all up and that gives us a time domain signal which is the signal that we are representing. So this might be, the recording of my voice speaking or any, any time domain signal that has finite energy, can be written as summations.
+
+00:03:48:03 - 00:04:17:20
+Unknown
+This summation of these basis functions, that all these different frequencies, all multiplied by a factor and added up. That's what this equation says. So once again, to reiterate, when I see this equation I really encourage you and I think about this as waveforms, these complex waveforms all at their own value of omega. Here they all we've got have them all at different values of omega.
+
+00:04:17:20 - 00:04:51:12
+Unknown
+We're going to then add them all up from omega equals minus infinity to infinity. And this is the way to think of a Fourier transform. Our time domain signals are made up of an amounts of weighted amounts of each of these different basis functions. And these are the basis functions. An interesting thing is if you have a symmetric function here, if this is symmetric with negative frequency and positive frequency, then where have you then you'll have negative omegas.
+
+00:04:51:14 - 00:05:20:22
+Unknown
+And the negative omega means that there's a minus out in front of the signs. So it means that the negative in the sine will cancel the positive in the sine. And so you're only left with the real valued signal. Okay. Another thing to point out is if we go down in this direction here and if we plotted in this direction and we sort of turn this on the side and, and plot in this direction here, down here where this is Omega and this is omega increasing.
+
+00:05:20:22 - 00:05:48:03
+Unknown
+If we go all the way from negative infinity to infinity, then in this direction, if this is the height here, we can plot the magnitude of J Omega. And so in this direction here you would have the Fourier transform. Okay. So in the time dimension on the horizontal direction here you have the signal in the time domain. And in the vertical dimension.
+
+00:05:48:03 - 00:06:18:10
+Unknown
+Here you have the signal in the frequency domain. And these are equivalent representations of the same signal. And I think this is a graphical way of understanding this equation and understanding why it's a transform. Because you can have a signal in one dimension, or you can transform it into an equivalent representation in another direction, in another dimension. So it can be written down in terms of frequency, or it can be written down in terms of time.
+
+00:06:18:12 - 00:06:24:27
+Unknown
+It's the same function, just a different representation. And so that's why we call it a transform.
+
