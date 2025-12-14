@@ -1,2 +1,2 @@
-# ml4eo-with-hpc
+# Machine Learning for Earth Observation powered by Supercomputers
 TÖV606M Machine Learning for Earth Observation powered by Supercomputers
