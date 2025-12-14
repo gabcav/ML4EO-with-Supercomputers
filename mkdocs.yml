@@ -20,11 +20,11 @@ plugins:
 # To define what files to include in the navigation
 nav:
    - Home: index.md
-   - Programme: chapters/programme/index.md
-   - Tags: tags.md
-   - Blog:
-      - blog/index.md
-   - Projects: chapters/projects/projects.md 
+   - Backgound: chapters/background/index.md
+#   - Tags: tags.md
+#   - Blog:
+#      - blog/index.md
+#   - Projects: chapters/projects/projects.md 
 #  - Slides: slides.md
 
 theme:
