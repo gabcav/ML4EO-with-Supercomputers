@@ -93,7 +93,7 @@ extra_css:
 
 extra:
   social:
-    - icon: simple/youtube
+    - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@TheAmmiraglio625
-    - icon: simple/linkedin
+    - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/dr-gabriele-cavallaro/
