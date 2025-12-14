@@ -32,8 +32,8 @@ theme:
   font: 
     text: Libre Franklin
     code: Red Hat Mono
-  #logo: assets/gc_icon.svg
-  #favicon: assets/gc_icon.svg
+  logo: assets/gc_icon.svg
+  favicon: assets/gc_icon.svg
   features:
     - navigation.footer
     - navigation.instant
