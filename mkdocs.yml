@@ -91,9 +91,9 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
-#extra:
-#  social:
-#    - icon: simple/youtube
-#      link: https://www.youtube.com/@TheAmmiraglio625
-#    - icon: simple/linkedin
-#      link: https://www.linkedin.com/in/dr-gabriele-cavallaro/
+extra:
+  social:
+    - icon: simple/youtube
+      link: https://www.youtube.com/@TheAmmiraglio625
+    - icon: simple/linkedin
+      link: https://www.linkedin.com/in/dr-gabriele-cavallaro/
