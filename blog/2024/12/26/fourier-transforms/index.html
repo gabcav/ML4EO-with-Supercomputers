@@ -1,0 +1,932 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ml4eo-with-hpc/blog/2024/12/26/fourier-transforms/">
+      
+      
+        <link rel="prev" href="../integrated-sensing-and-communication-isac/">
+      
+      
+        <link rel="next" href="../complex-analysis-101/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/gc_icon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Fourier Transforms - Machine Learning for Earth Observation powered by Supercomputers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Libre Franklin";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fourier-transforms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Machine Learning for Earth Observation powered by Supercomputers" class="md-header__button md-logo" aria-label="Machine Learning for Earth Observation powered by Supercomputers" data-md-component="logo">
+      
+  <img src="../../../../../assets/gc_icon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Machine Learning for Earth Observation powered by Supercomputers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fourier Transforms
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Machine Learning for Earth Observation powered by Supercomputers" class="md-nav__button md-logo" aria-label="Machine Learning for Earth Observation powered by Supercomputers" data-md-component="logo">
+      
+  <img src="../../../../../assets/gc_icon.svg" alt="logo">
+
+    </a>
+    Machine Learning for Earth Observation powered by Supercomputers
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../chapters/background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backgound
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#more-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        More Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-of-fourier-transform-of-a-rectangular-pulse-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proof of Fourier Transform of a Rectangular Pulse Signal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proof of Fourier Transform of a Rectangular Pulse Signal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-fourier-transform-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Fourier Transform Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-solve-the-integral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Solve the Integral
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-simplify-the-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Simplify the Expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-recognize-the-sinc-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Recognize the Sinc Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Result
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-fourier-transform-of-a-periodic-function-in-time-results-in-a-dirac-comb-in-the-frequency-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fourier transform of a periodic function in time results in a Dirac comb in the frequency domain.
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-26 00:00:00+00:00" class="md-ellipsis">December 26, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/fourier-transforms/">Fourier Transforms</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              10 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../../../tags/#tag:fourier-transform" class="md-tag">Fourier Transform</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="fourier-transforms">Fourier Transforms</h1>
+<p>The Fourier transform explains how a signal in one domain (time) can be transformed into another domain (frequency), and viceversa.  </p>
+<div class="admonition note">
+<p class="admonition-title">The <strong>transform equation</strong> expresses a time-domain function <span class="arithmatex">\(x(t)\)</span> in terms of a frequency-domain function <span class="arithmatex">\(X(\omega)\)</span>.</p>
+<div class="arithmatex">\[
+\Large x(t)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} X(j \omega) e^{j \omega t} d \tau$ 
+\]</div>
+</div>
+<p>A time-domain function can be represented as a combination of waveforms. Each waveforms has a real and an imaginary component:</p>
+<ul>
+<li>Real component: <span class="arithmatex">\( \cos(\omega t) \)</span>.</li>
+<li>Imaginary component: <span class="arithmatex">\( \sin(\omega t) \)</span>.</li>
+</ul>
+<p>These <strong>waveforms are the building blocks for the transformation</strong> and they are referred as <strong>basis functions</strong>. With the Euler's formula we obtain:</p>
+<div class="arithmatex">\[
+\Large x(t)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} X(j \omega) [(\cos (\omega t)+j \sin (\omega t)] d \tau
+\]</div>
+<p>The formula indicates that we consider all the frequencies from <span class="arithmatex">\(-\infty\)</span> to <span class="arithmatex">\(\infty\)</span>. Each function <span class="arithmatex">\(X(j\omega)\)</span> at a specific 
+frequency (e.g., <span class="arithmatex">\(\omega_1\)</span>, <span class="arithmatex">\(\omega_2\)</span>, etc.) <strong>weights the basis functions</strong> <span class="arithmatex">\(\cos (\omega t)\)</span>
+and  <span class="arithmatex">\(\sin (\omega t)\)</span>.</p>
+<p>&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<br></p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_1.svg" /></p>
+<p>&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<br></p>
+<p>This means that any time-domain signal  <span class="arithmatex">\(x(t)\)</span>  that has finite energy can be written as a summation of the basis functions  <span class="arithmatex">\(\cos(\omega t)\)</span>  and  <span class="arithmatex">\(\sin(\omega t)\)</span>  at all frequencies (from  <span class="arithmatex">\(-\infty\)</span>  to  <span class="arithmatex">\(\infty\)</span> ), each multiplied by a factor  <span class="arithmatex">\(X(j\omega)\)</span>. </p>
+<p>&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<br></p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_2.svg" /></p>
+<p><span class="arithmatex">\(x(t)\)</span> and <span class="arithmatex">\(X(jw)\)</span> are equivant representations of the same signal, and any signal <span class="arithmatex">\(x(t)\)</span> can be made up of sinusoidal components. </p>
+<h2 id="more-considerations">More Considerations</h2>
+<p>Let’s consider, for example, a voice signal <span class="arithmatex">\(x(t)\)</span>, which has low-pass characteristics, meaning that I can only produce the sound of my voice at certain frequencies below <span class="arithmatex">\(\omega\)</span>.</p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_3.svg" /></p>
+<p>Let's have a cosine wave at different frequencies <span class="arithmatex">\(\cos \left(2 \pi f_1 t\right)\)</span> and <span class="arithmatex">\(\cos \left(2 \pi f_2 t\right)\)</span>. In the frequency domain, <strong>each wave can have only a single frequency component</strong>, represented as a delta function (with the matching negative component).</p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_4.svg" /></p>
+<p>If we have an infinite number of wave functions each using a different frequency, all the delta functions appearing in the frequency domain (infinitely close together, forming a continuous signal in the frequency domain) will define the original signal in the time domain when summed up with the right weights.</p>
+<p>To understand why we have negative components in the frequency domain, we can take a sine wave at the same frequency <span class="arithmatex">\(f_2\)</span> as the previous cosine wave. They have the same frequency but a <strong>different phase.</strong></p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_5.svg" /></p>
+<p>The signal <span class="arithmatex">\(w(t) = \sin \left(2 \pi f_2 t\right)\)</span> can be written as a complex number by relying on the Euler's formula <span class="arithmatex">\(e^{j \theta}=\cos (\theta)+j \sin (\theta)\)</span> and its counterpart <span class="arithmatex">\(e^{-j \theta}=\cos (\theta)-j \sin (\theta)\)</span>:</p>
+<p>Add and subtract the equations :</p>
+<ul>
+<li><span class="arithmatex">\(e^{j \theta}+e^{-j \theta}=2 \cos (\theta)\)</span> <span class="arithmatex">\(\rightarrow\)</span> <span class="arithmatex">\(\cos (\theta)=\frac{e^{j \theta}+e^{-j \theta}}{2}\)</span></li>
+<li><span class="arithmatex">\(e^{j \theta}-e^{-j \theta}=2 j \sin (\theta)\)</span> <span class="arithmatex">\(\rightarrow\)</span>
+<span class="arithmatex">\(\sin (\theta)=\frac{e^{j \theta}-e^{-j \theta}}{2 j}\)</span></li>
+</ul>
+<p>Now, use the formulas for <span class="arithmatex">\(sin(\theta)\)</span> to rewrite <span class="arithmatex">\(w(t) = \sin \left(2 \pi f_2 t\right)\)</span>:</p>
+<ul>
+<li>
+<p>Substitute <span class="arithmatex">\(\theta=2 \pi f_2 t\)</span> into the formula for <span class="arithmatex">\(\sin (\theta)\)</span> :</p>
+<ul>
+<li><span class="arithmatex">\(\sin \left(2 \pi f_2 t\right)=\frac{e^{j 2 \pi f_2 t}-e^{-j 2 \pi f_2 t}}{2 j}\)</span></li>
+</ul>
+</li>
+<li>
+<p>Replace <span class="arithmatex">\(\sin \left(2 \pi f_2 t\right)\)</span> with <span class="arithmatex">\(w(t)\)</span>, as defined in the problem:</p>
+<ul>
+<li><span class="arithmatex">\(w(t)=\frac{1}{2 j}\left(e^{j 2 \pi f_2 t}-e^{-j 2 \pi f_2 t}\right)\)</span></li>
+</ul>
+</li>
+</ul>
+<p>Interpret the terms:</p>
+<div class="arithmatex">\[
+\huge w(t)=\frac{1}{2 j}\left(e^{j 2 \pi f_2 t} - e^{-j 2 \pi f_2 t}\right)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\frac{1}{2 j}\)</span> coefficient</li>
+<li><span class="arithmatex">\(e^{j 2 \pi f_2 t}\)</span> represents the complex exponential at a positive frequency  <span class="arithmatex">\(f_2\)</span>.</li>
+<li><span class="arithmatex">\(e^{-j 2 \pi f_2 t}\)</span> represents the complex exponential at a negative frequency  <span class="arithmatex">\(-f_2\)</span>.</li>
+</ul>
+<p>So far, we have plotted only the magnitude of the signals in the frequency domain. However, since we are manipulating complex numbers, <strong>we also need to plot the phase</strong>.</p>
+<p>Let’s rearrange the formula above and derive the polar coordinates:</p>
+<ul>
+<li>
+<p>Simplify the coefficient <span class="arithmatex">\(\frac{1}{2 j}\)</span>, by using the property <span class="arithmatex">\(\frac{1}{j}=-j\)</span>, rewrite:</p>
+<ul>
+<li><span class="arithmatex">\(\frac{1}{2 j}=-\frac{1}{2} j\)</span></li>
+</ul>
+</li>
+<li>
+<p>In the complex plane, <span class="arithmatex">\(-j\)</span> corresponds to a phase of <span class="arithmatex">\(-\frac{\pi}{2}\)</span>. </p>
+<ul>
+<li>Using the polar form: <span class="arithmatex">\(-j=e^{-j_2\frac{\pi}{2}}\)</span></li>
+<li>Substitute this into <span class="arithmatex">\(-\frac{1}{2} j=\frac{1}{2} e^{-j \frac{\pi}{2}}\)</span></li>
+</ul>
+</li>
+<li>
+<p>Combining these results, we have:</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\huge \frac{1}{2 j}=-\frac{1}{2} j=\frac{1}{2} e^{-j \frac{\pi}{2}}
+\]</div>
+<div class="arithmatex">\[
+\huge w(t)=-\frac{1}{2}j\left(e^{j 2 \pi f_2 t} - e^{-j 2 \pi f_2 t}\right)
+\]</div>
+<div class="arithmatex">\[
+\huge= -\frac{1}{2}je^{j 2 \pi f_2 t}+\frac{1}{2}je^{-j 2 \pi f_2 t}
+\]</div>
+<ul>
+<li>The positive frequency <span class="arithmatex">\(e^{j 2 \pi f_2 t}\)</span> rotates <span class="arithmatex">\(90^{\circ}\)</span> counterclockwise in the complex plane, and the coefficient introduces a phase of <span class="arithmatex">\(-\frac{\pi}{2}\)</span>.</li>
+<li>The negative frequency <span class="arithmatex">\(e^{-j 2 \pi f_2 t}\)</span> rotates <span class="arithmatex">\(90^{\circ}\)</span> clockwise in the complex plane, and the coefficient introduces a phase of <span class="arithmatex">\(\frac{\pi}{2}\)</span>.</li>
+</ul>
+<p>This is why the positive frequency has a phase of <span class="arithmatex">\(-\frac{\pi}{2}\)</span> and the negative frequency has a phase of <span class="arithmatex">\(\frac{\pi}{2}\)</span>. Together, they ensure the correct representation of the real-valued sine wave.</p>
+<p><img alt="A descriptive alternative text" src="../../../../fourier_transforms/images/fourier_transform_6.svg" /></p>
+<p>To summarize, at each frequency, there exist two different signals that are orthogonal: cosine and sine. Therefore, we need two components in the frequency domain, and this is one of the main reasons for using complex numbers.</p>
+<p><strong>Check the case for the cosine</strong></p>
+<p><a href="https://youtu.be/gz6AKW-R69s?si=itBxrd45HZpqiqwg">Video link What is Negative Frequency?</a></p>
+<h2 id="transform-rectangular-pulse-signal">Transformation of Rectangular Pulse Signal</h2>
+
+<h2 id="proof-of-fourier-transform-of-a-rectangular-pulse-signal">Proof of Fourier Transform of a Rectangular Pulse Signal</h2>
+<div class="admonition note">
+<p class="admonition-title">Transform of a Rectangular Pulse Signal</p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \Pi\left(\frac{t}{T}\right) \equiv 
+\begin{cases} 
+1 &amp; \text{if } |t| \leq \frac{T}{2} \\ 
+0 &amp; \text{if } |t| &gt; \frac{T}{2}
+\end{cases}\)</span>
+</p></p>
+<p><p align="center">
+<img alt="Rectangular Pulse Signal" height="200px" src="../../../../fourier_transforms/images/rectangular_pulse_signal_white.svg" width="300px" />
+</p></p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \mathcal{F(A\Pi\left(\frac{t}{T}\right))}=A T \frac{\sin \left(2 \pi f \frac{T}{2}\right)}{2 \pi f \frac{T}{2}}=A T \cdot \operatorname{sinc}(f T)\)</span>
+</p></p>
+</div>
+<p>We want to compute the Fourier Transform of the rectangular pulse signal:</p>
+<div class="arithmatex">\[
+A \Pi\left(\frac{t}{T}\right)
+\]</div>
+<p>where <span class="arithmatex">\(\Pi(x)\)</span> is the rectangular function defined as:</p>
+<div class="arithmatex">\[
+\Pi(x) =
+\begin{cases}
+1 &amp; \text{if } |x| \leq \frac{1}{2}, \\
+0 &amp; \text{otherwise.}
+\end{cases}
+\]</div>
+<p>The goal is to prove:</p>
+<div class="arithmatex">\[
+\mathcal{F} \left[ A \Pi\left(\frac{t}{T}\right) \right] = AT \cdot \text{sinc}(fT)
+\]</div>
+<hr />
+<h3 id="1-fourier-transform-definition">1. Fourier Transform Definition</h3>
+<p>The Fourier Transform of a time-domain signal <span class="arithmatex">\(x(t)\)</span> is defined as:</p>
+<div class="arithmatex">\[
+\mathcal{F}[x(t)] = X(f) = \int_{-\infty}^\infty x(t) e^{-j 2\pi f t} dt
+\]</div>
+<p>For <span class="arithmatex">\(A \Pi\left(\frac{t}{T}\right)\)</span>, the function is nonzero only for <span class="arithmatex">\(|t| \leq \frac{T}{2}\)</span>. Thus, the limits of integration are restricted to <span class="arithmatex">\(t \in \left[-\frac{T}{2}, \frac{T}{2}\right]\)</span>, and the Fourier Transform becomes:</p>
+<div class="arithmatex">\[
+X(f) = \int_{-\frac{T}{2}}^{\frac{T}{2}} A e^{-j 2\pi f t} dt
+\]</div>
+<hr />
+<h3 id="2-solve-the-integral">2. Solve the Integral</h3>
+<p>Factor out the constant <span class="arithmatex">\(A\)</span>:</p>
+<div class="arithmatex">\[
+X(f) = A \int_{-\frac{T}{2}}^{\frac{T}{2}} e^{-j 2\pi f t} dt
+\]</div>
+<p>This is a standard integral of the exponential function. The solution of this integral is:</p>
+<div class="arithmatex">\[
+\int e^{-j 2\pi f t} dt = \frac{e^{-j 2\pi f t}}{-j 2\pi f}
+\]</div>
+<p>Now evaluate this over the limits <span class="arithmatex">\(t = -\frac{T}{2}\)</span> and <span class="arithmatex">\(t = \frac{T}{2}\)</span>:</p>
+<div class="arithmatex">\[
+X(f) = A \left[ \frac{e^{-j 2\pi f \frac{T}{2}} - e^{j 2\pi f \frac{T}{2}}}{-j 2\pi f} \right]
+\]</div>
+<hr />
+<h3 id="3-simplify-the-expression">3. Simplify the Expression</h3>
+<p>Combine the exponentials using Euler's formula:</p>
+<div class="arithmatex">\[
+e^{-j\theta} - e^{j\theta} = -2j \sin(\theta)
+\]</div>
+<p>Here, <span class="arithmatex">\(\theta = \pi f T\)</span>. Substituting this into the expression:</p>
+<div class="arithmatex">\[
+X(f) = A \cdot \frac{-2j \sin(\pi f T)}{-j 2\pi f}
+\]</div>
+<p>Cancel out the <span class="arithmatex">\(-j\)</span> terms and simplify:</p>
+<div class="arithmatex">\[
+X(f) = A \cdot \frac{\sin(\pi f T)}{\pi f}
+\]</div>
+<hr />
+<h3 id="4-recognize-the-sinc-function">4. Recognize the Sinc Function</h3>
+<p>The normalized sinc function is defined as:</p>
+<div class="arithmatex">\[
+\text{sinc}(x) = \frac{\sin(\pi x)}{\pi x}
+\]</div>
+<p>Substitute <span class="arithmatex">\(x = fT\)</span> into the definition:</p>
+<div class="arithmatex">\[
+X(f) = A T \cdot \text{sinc}(fT)
+\]</div>
+<hr />
+<h3 id="final-result">Final Result</h3>
+<p>Thus, the Fourier Transform of <span class="arithmatex">\(A \Pi\left(\frac{t}{T}\right)\)</span> is:</p>
+<div class="arithmatex">\[
+\mathcal{F} \left[ A \Pi\left(\frac{t}{T}\right) \right] = AT \cdot \text{sinc}(fT)
+\]</div>
+<h2 id="the-fourier-transform-of-a-periodic-function-in-time-results-in-a-dirac-comb-in-the-frequency-domain">The Fourier transform of a periodic function in time results in a Dirac comb in the frequency domain.</h2>
+<div class="admonition note">
+<p class="admonition-title">Dirac delta function</p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \delta\left(t-t_0\right)\)</span> (i.e., impulse in <span class="arithmatex">\(t=t_0\)</span>)
+</p></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"> Train of Dirac delta functions (i.e., train of impulses)</p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \sum_{k=-\infty}^{k=\infty} \delta(t-k T)\)</span>
+</p></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Transform of a train of Dirac delta functions (i.e., train of impulses)</p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \mathcal{F}\left\{\delta\left(t-T\right)\right\}=e^{-j 2 \pi f T}\)</span>
+</p></p>
+<ul>
+<li>
+<p>The Fourier Transform of a train of impulses in time produces another train in the frequency domain.</p>
+</li>
+<li>
+<p>The exponential term represents a phase shift in the frequency domain.</p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Transform of a train of impulses (i.e., Dirac delta functions)</p>
+<p>Apply Fourier transform </p>
+<p><span class="arithmatex">\(\huge \mathcal{F}\left(\sum_{k=-\infty}^{\infty} \delta(t-k T)\right)=\int_{-\infty}^{\infty} \left(\sum_{k=-\infty}^{\infty} \delta(t-k T)\right) e^{-j 2 \pi f t} \, dt\)</span></p>
+<p>Using the linearity of integration and summation, we can interchange the order:</p>
+<p><span class="arithmatex">\(\huge X(f) = \sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty} \delta(t-k T) e^{-j 2 \pi f t} \, dt\)</span></p>
+<p>The sifting property of the Dirac delta function <span class="arithmatex">\(\int_{-\infty}^{\infty} f(t) \delta\left(t-t_0\right) d t=f\left(t_0\right)\)</span> gives:</p>
+<p><span class="arithmatex">\(\huge \int_{-\infty}^{\infty} e^{-j 2 \pi f t}  \delta(t-k T) d t=e^{-j 2 \pi f k T}\)</span></p>
+<p>So:</p>
+<p><span class="arithmatex">\(\huge X(f)=\sum_{k=-\infty}^{\infty} e^{-j 2 \pi f k T}\)</span></p>
+<p>Recal Euler's formula</p>
+<p><span class="arithmatex">\(\huge e^{-j \theta}=\cos (\theta)-j \sin (\theta)\)</span></p>
+<p>So, for each term in the summation: </p>
+<p><span class="arithmatex">\(\huge e^{-j 2 \pi f k T}=\cos (2 \pi f k T)-j \sin (2 \pi f k T)\)</span></p>
+<p>The summation can now be rewritten as:</p>
+<p><span class="arithmatex">\(\huge \sum_{k=-\infty}^{\infty} e^{-j 2 \pi f k T}=\sum_{k=-\infty}^{\infty} \cos (2 \pi f k T)-j \sum_{k=-\infty}^{\infty} \sin (2 \pi f k T)\)</span></p>
+<p>The sum <span class="arithmatex">\(\sum_{k=-\infty}^{\infty} e^{-j 2 \pi f k T}\)</span> is periodic, forming a Dirac comb in the frequency domain. To show this explicitly, we use the property of the Dirac comb:</p>
+<p><span class="arithmatex">\(\huge \sum_{k=-\infty}^{\infty} e^{-j 2 \pi f k T}=\frac{1}{T} \sum_{n=-\infty}^{\infty} \delta\left(f-\frac{n}{T}\right)\)</span></p>
+<p>This result is derived from the periodicity of the exponential terms in the sum.</p>
+<p>From the above, we can write:</p>
+<p><span class="arithmatex">\(\huge X(f)=\frac{1}{T} \sum_{n=-\infty}^{\infty} \delta\left(f-n f_0\right), \quad \text { where } \quad f_0=\frac{1}{T}\)</span></p>
+<p>To express this more compactly:</p>
+<p><span class="arithmatex">\(\huge \mathcal{F}\left(\sum_{k=-\infty}^{\infty} \delta(t-k T)\right)=f_0 \sum_{n=-\infty}^{\infty} \delta\left(f-n f_0\right)\)</span></p>
+</div>
+<p>Intuition Behind the Result</p>
+<p>1 The Dirac comb in the time domain is periodic with period T. In the frequency domain, this periodicity
+creates a series of delta functions spaced at intervals of <span class="arithmatex">\(f_0=\frac{1}{T}\)</span></p>
+<p>2 The scaling factor Jo ensures that the total energy is preserved between the time and frequency
+domains.</p>
+<p>This result shows the Fourier duality between a periodic structure in time and a periodic structure in
+frequency.</p>
+<div class="admonition note">
+<p class="admonition-title">Transform of a Dirac Delta Signal</p>
+<ul>
+<li>The Fourier Transform of a single Dirac delta function <span class="arithmatex">\(\delta\left(t-t_k\right)\)</span> (i.e., impulse in <span class="arithmatex">\(t=t_k\)</span>) is: <span class="arithmatex">\(\mathcal{F}\left\{\delta\left(t-t_k\right)\right\}=e^{-j 2 \pi f t_k}\)</span></li>
+<li>Use the linearity property: <span class="arithmatex">\(\mathcal{F}\left\{a_k \delta\left(t-t_k\right)\right\}=a_k \cdot \mathcal{F}\left\{\delta\left(t-t_k\right)\right\}=a_k e^{-j 2 \pi f_k}\)</span></li>
+<li>Sum the contributions for all the Dirac delta functions.</li>
+</ul>
+</div>
+<h1 id="to-process">TO PROCESS</h1>
+<h2 id="symmetry-and-real-signals">Symmetry and Real Signals</h2>
+<p>For symmetric signals <span class="arithmatex">\(X(j\omega)\)</span>, the negative and positive frequency components cancel out their imaginary parts, resulting in a purely real signal.</p>
+<div class="admonition note">
+<p class="admonition-title">Fourier Transform of a time-domain signal</p>
+<p><p align="center">
+<span class="arithmatex">\(\Large \mathcal{F}[x(t)]=X(f)=\int_{-\infty}^{\infty} x(t) e^{-j 2 \pi f t} d t\)</span>
+</p></p>
+</div>
+<h3 id="source">Source</h3>
+<p><a href="https://youtu.be/8V6Hi-kP9EE?si=XLGGgHTuqk8hiuar">Fourier Transform Equation Explained</a>
+<a href="https://youtu.be/G74t5az6PLo?si=A3xAEe48V46HBd2I">What is the Fourier Transform?</a></p>
+<h2 id="material">Material</h2>
+<ul>
+<li>
+<p><a href="https://databookuw.com/">Chapter 2 Fourier and Wavelet Transforms</a></p>
+<ul>
+<li><a href="https://databookuw.com/databook.pdf">book</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">An Interactive Guide To The Fourier Transform</a></p>
+</li>
+<li>
+<p><a href="https://youtube.com/playlist?list=PLxdnSsBqCrrEXKhynsK_u-suvtWzMwY5A&amp;si=Fp9T4bssufCIBu8m">Fourier Analysis</a></p>
+</li>
+</ul>
+<p><a href="https://www.iaincollings.com/"> Everything you've ever wondered about Signals and Digital Communications</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../integrated-sensing-and-communication-isac/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Integrated Sensing and Communication (ISAC)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Integrated Sensing and Communication (ISAC)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../complex-analysis-101/" class="md-footer__link md-footer__link--next" aria-label="Next: Complex Analysis 101">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Complex Analysis 101
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@TheAmmiraglio625" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/dr-gabriele-cavallaro/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.footer", "navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../../../overrides/mathjax-init.js"></script>
+      
+    
+  </body>
+</html>
