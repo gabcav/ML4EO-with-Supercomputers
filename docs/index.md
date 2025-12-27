@@ -19,7 +19,7 @@ At the end of this course, a student shall be able to:
 
 - Understand and contextualize core concepts in Earth observation and machine learning, including the evolution of remote sensing data, characteristics of big EO datasets, and the foundational principles behind modern Geospatial AI models (e.g., self-supervised learning, Transformer architectures).  
 - Apply machine learning and deep learning techniques to real Earth observation problems, demonstrating proficiency in model selection, training, validation, and interpretation for tasks such as land-cover classification, change detection, and environmental monitoring.  
-- Leverage high-performance computing resources to design, scale, and optimize large machine learning workflows, including distributed training of foundation models and performance evaluation using standardized benchmarks.  
+- Leverage high-performance computing resources to design, scale, and optimize large machine learning workflows, including distributed training and fine-tuning of models across multiple GPUs, and evaluate performance using standardized benchmarks.
 - Develop and deliver a practical, project-based solution that integrates remote sensing satellite data, Python-based APIs, and open models, showing the ability to translate theoretical knowledge into operational Earth observation applications with documented results.
 
 
